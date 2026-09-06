@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1E3A5F">
   <title>PKH Tools - Kabupaten Kediri</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
 :root{
   --navy-950:#0B1F3A;
@@ -319,7 +317,8 @@ function apiCall(action, params) {
 let currentToken = null;
 
 // ---------- Inisialisasi halaman ----------
-window.onload = function () {
+// (Dipicu begitu struktur HTML siap, TIDAK menunggu font/gambar dari luar selesai dimuat)
+document.addEventListener("DOMContentLoaded", function () {
   currentToken = localStorage.getItem("pkh_token");
   if (currentToken) {
     apiCall("checkSession", { token: currentToken }).then((res) => {
@@ -333,7 +332,7 @@ window.onload = function () {
   } else {
     showScreen("loginScreen");
   }
-};
+});
 
 function showScreen(id) {
   ["loadingScreen", "loginScreen", "changePasswordScreen", "appScreen"].forEach(function (s) {
