@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pkh-tools-v1';
+const CACHE_NAME = 'pkh-tools-v2';
 const ASSETS = [
   './index.html',
   './style.css',
