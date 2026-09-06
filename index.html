@@ -317,8 +317,12 @@ function apiCall(action, params) {
 let currentToken = null;
 
 // ---------- Inisialisasi halaman ----------
-// (Dipicu begitu struktur HTML siap, TIDAK menunggu font/gambar dari luar selesai dimuat)
+// PENTING: layar login SELALU ditampilkan dulu tanpa menunggu apa pun.
+// Kalau ada sesi lama tersimpan, dicek diam-diam di belakang layar —
+// supaya kalau server lambat/tidak merespon, tampilan tidak ikut macet.
 document.addEventListener("DOMContentLoaded", function () {
+  showScreen("loginScreen");
+
   currentToken = localStorage.getItem("pkh_token");
   if (currentToken) {
     apiCall("checkSession", { token: currentToken }).then((res) => {
@@ -326,11 +330,8 @@ document.addEventListener("DOMContentLoaded", function () {
         loadMyData();
       } else {
         localStorage.removeItem("pkh_token");
-        showScreen("loginScreen");
       }
     });
-  } else {
-    showScreen("loginScreen");
   }
 });
 
